@@ -11,21 +11,21 @@ const FILES_TO_CACHE = [
     "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
     "https://cdn/jsdeliver.net/npm/chart.js@2.8.0"
 ];
-const PRECACHE = "precache-v1";
+const STATIC_CACHE = "static-cache-v1";
 const RUNTIME = "runtime";
 
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches
-            .open(PRECACHE)
+            .open(STATIC_CACHE)
             .then((cache) => cache.addAll(FILES_TO_CACHE))
-            .then(self.skipWaiting())
+            .then(() => self.skipWaiting())
     );
 });
 
 // handler takes care of cleaning up old caches
 self.addEventListener("activate", (event) => {
-    const currentCaches = [PRECACHE, RUNTIME];
+    const currentCaches = [STATIC_CACHE, RUNTIME];
 
     event.waitUntil(
         caches

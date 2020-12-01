@@ -3,7 +3,7 @@ let db;
 const request = indexedDB.open("budget", 1);
 
 request.onupgradeneeded = (event) => {
-    db = event.target.result;
+    const db = event.target.result;
     db.createObjectStore("pending", { autoIncrement: true });
 };
 
@@ -15,7 +15,7 @@ request.onsuccess = (event) => {
     db = event.target.result;
 
     // check if online
-    if (navigator.online) {
+    if (navigator.onLine) {
         checkDb;
     }
 };
@@ -52,15 +52,19 @@ function checkDb() {
     }
 };
 
-// listen for app to come back online
-window.addEventListener("online", checkDb);
-
-export function saveRecord(record) {
+function saveRecord(record) {
     const transaction = db.transaction(["pending"], "readwrite");
     const store = transaction.objectStore("pending");
 
     store.add(record);
 };
+
+// listen for app to come back online
+window.addEventListener("online", checkDb);
+
+module.exports = { saveRecord };
+
+
 
 
 // todo need to use indexeddb?
