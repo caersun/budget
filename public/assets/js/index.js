@@ -1,3 +1,5 @@
+const saveRecord = require("./db").saveRecord;
+
 let transactions = [];
 let myChart;
 

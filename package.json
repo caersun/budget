@@ -5,13 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm rum start:dev",
-    "start:prod": "npm run build && node server.js",
-    "start:dev": "concurrently \"npm run server\" \"cd client && npm run start\"",
-    "server": "nodemon server.js --ignore public",
-    "build": "cd public && npm run build",
-    "install": "cd client && npm install",
-    "client": "cd client && npm start",
+    "prestart": "npm run webpack --watch",
+    "start": "node server.js",
+    "webpack": "webpack",
+    "server": "nodemon server.js",
     "lite-server": "lite-server"
   },
   "repository": {
@@ -25,15 +22,21 @@
   },
   "homepage": "https://github.com/coding-boot-camp/unit18hw#readme",
   "dependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "lite-server": "^2.5.3",
     "mongoose": "^5.5.15",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "webpack": "^5.9.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-pwa-manifest": "^4.3.0"
   },
   "devDependencies": {
-    "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
   }
 }

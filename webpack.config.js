@@ -2,16 +2,14 @@ const WebpackPWAManifest = require("webpack-pwa-manifest");
 const path = require("path");
 
 const config = {
-    entry: {
-        index: "./assets/js/index.js"
-    },
+    entry: "./public/assets/js/index.js",
     output: {
         path: __dirname + "/dist",
-        filename: "[name].bundle.js"
+        filename: "bundle.js"
     },
     mode: "development",
     module: {
-        rules: {
+        rules: [{
             test: /\.js$/,
             exclude: /node_modules/,
             use: {
@@ -20,23 +18,25 @@ const config = {
                     presets: ["@babel/preset-env"]
                 }
             }
-        }
+        }]
     },
     plugins: [
         new WebpackPWAManifest({
             publicPath: "/dist",
+            filename: "manifest.webmanifest",
+            inject: false,
             fingerprints: false,
             name: "Budget Tracket App",
             short_name: "Budget",
             description: "An application to keep track of your personal finances.",
             background_color: "#01579b",
             theme_color: "#ffffff",
-            "theme_color": "#ffffff",
+            "theme_color": "#ffffff", // TODO
             start_url: "/",
+            display: "standalone",
             icons: [{
-                src: path.resolve("assets/images/icons/icon-512x512.png"),
-                sizes: [96, 128, 192, 256, 384, 512],
-                destination: path.join("assets", "icons")
+                src: path.resolve(__dirname, "public/assets/images/icons/icon-512x512.png"), // TODO: why not path.join() ?
+                sizes: [96, 128, 192, 256, 384, 512]
             }]
         })
     ]
