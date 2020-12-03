@@ -1,4 +1,3 @@
-// TODO: should we be checking for indexedDb?
 let db;
 const request = indexedDB.open("budget", 1);
 
@@ -29,6 +28,7 @@ function checkDb() {
 
     getAll.onsuccess = function() {
         if (getAll.result.length > 0) {
+            console.log("I'm a fetch in db.js");
             fetch("/api/transaction/bulk", {
                 method: "POST",
                 body: JSON.stringify(getAll.result),
@@ -38,9 +38,6 @@ function checkDb() {
                 }
             }).then((response) => response.json())
             .then(() => {
-                console.log("Success!! We did something!!");
-                console.log("Should we clear items in store?");
-
                 // if successful, open a transaction on your pending db
                 const transaction = db.transaction(["pending"], "readwrite");
                 // access your pending object store
@@ -61,5 +58,3 @@ function saveRecord(record) {
 
 // listen for app to come back online
 window.addEventListener("online", checkDb);
-
-module.exports = { saveRecord };
