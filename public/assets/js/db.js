@@ -58,3 +58,5 @@ function saveRecord(record) {
 
 // listen for app to come back online
 window.addEventListener("online", checkDb);
+
+module.exports = { saveRecord };

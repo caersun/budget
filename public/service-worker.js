@@ -4,8 +4,7 @@ const FILES_TO_CACHE = [
     "/assets/css/styles.css",
     "/assets/images/icons/icon-192x192.png",
     "/assets/images/icons/icon-512x512.png",
-    "/assets/js/index.js",
-    "/assets/js/db.js",
+    
     "/dist/bundle.js",
     "/dist/manifest.webmanifest",
     "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
@@ -56,13 +55,19 @@ self.addEventListener("fetch", (event) => {
                     return caches
                         .open(RUNTIME)
                         .then((cache) => {
+                            console.log("cache: ", cache);
                             return fetch(event.request)
                                 .then((response) => {
                                     console.log("response:", response);
                                     return cache
+                                        // .add(event.request)
                                         // .put(event.request, response.clone())
                                         .match(event.request)
-                                        .then(() => { return response; });
+                                        .then(() => { 
+                                            console.log("cache2:", cache)
+                                            console.log("response2:", response);
+                                            return response; 
+                                        });
                                 })
                                 .catch((err) =>{
                                     console.log("fetch err:", err);
@@ -71,6 +76,7 @@ self.addEventListener("fetch", (event) => {
                         })
                         .catch(err => console.log(err));
                 })
+                .catch(err => console.log(err))
         );
     }
 });
