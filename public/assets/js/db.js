@@ -17,6 +17,7 @@ request.onsuccess = (event) => {
 
     // check if online
     if (navigator.onLine) {
+        console.log("we're online!");
         checkDb;
     }
 };
