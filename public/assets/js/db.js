@@ -12,6 +12,8 @@ request.onerror = (event) => {
 
 request.onsuccess = (event) => {
     db = event.target.result;
+    console.log("hello from onsucess!");
+    console.log("db", db);
 
     // check if online
     if (navigator.onLine) {

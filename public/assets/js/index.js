@@ -5,6 +5,7 @@ let myChart;
 
 fetch("/api/transaction")
   .then(response => {
+    console.log("on init? response", response);
     return response.json();
   })
   .then(data => {
@@ -124,6 +125,7 @@ function sendTransaction(isAdding) {
     }
   })
   .then(response => {    
+    console.log("response from index.js", response);
     return response.json();
   })
   .then(data => {
