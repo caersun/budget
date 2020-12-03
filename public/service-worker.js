@@ -9,7 +9,7 @@ const FILES_TO_CACHE = [
     "/dist/bundle.js",
     "/dist/manifest.webmanifest",
     "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
-    "https://cdn/jsdeliver.net/npm/chart.js@2.8.0"
+    "https://cdn.jsdelivr.net/npm/chart.js@2.8.0"
 ];
 const STATIC_CACHE = "static-cache-v1";
 const RUNTIME = "runtime";
