@@ -63,34 +63,3 @@ function saveRecord(record) {
 window.addEventListener("online", checkDb);
 
 module.exports = { saveRecord };
-
-
-
-
-// todo need to use indexeddb?
-// use function if accessing db
-// export function useIndexedDb(databaseName) {
-//     return new Promise((resolve, reject) => {
-//         const request = window.indexedDB.open(databaseName, 1);
-//         let db;
-        
-//         request.onupgradeneeded = function(event) {
-//             db = event.target.result;
-//             // console log these bc ???
-//             db.createObjectStore("pending", { autoIncrement: true });
-//         };
-
-//         request.onerror = function(event) {
-//             console.log("There was an error", event.target.errorCode);
-//         };
-
-//         request.onsuccess = function(event) {
-//             db = event.target.result;
-
-//             // check if online
-//             if (navigator.onLine) {
-//                 checkDb;
-//             }
-//         };
-//     });
-// };
